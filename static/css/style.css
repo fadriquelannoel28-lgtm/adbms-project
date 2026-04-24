@@ -1,0 +1,117 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    min-height: 100vh;
+    background-color: rgb(239, 239, 239);
+}
+.navigator {
+    background-color: white;
+    width: 20%;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.navigator h1 {
+    color: #528ca6;
+    text-align: center;
+    padding: 20px 0;
+}
+.navigator ul {
+    padding: 0;
+    margin: 0;
+}
+.navigator ul li {
+    list-style-type: none;
+    margin: 5px;
+    text-align: left;
+    font-size: 18px;
+    border-radius: 5px;
+    overflow: hidden;
+    border-left: 3px solid transparent;
+    transition: all 0.1s ease-in-out;
+}
+.navigator ul li:hover {
+    background-color: #cbe2ec;
+}
+
+.navigator ul li.active {
+    background-color: #cbe2ec; 
+    border-left: 3px solid #528ca6;
+    transition: background-color 0.1s ease-in-out;
+}
+
+.navigator ul li.active a {
+    color: black;
+} 
+.navigator ul li.active i {
+    color: #528ca6;
+}
+
+
+
+.navigator ul li i {
+    width: 25px;          
+    margin-right: 15px;   
+    text-align: center;    
+    font-size: 20px;       
+    color: gray;    
+}
+.navigator ul li a {
+    text-decoration: none;
+    padding: 15px 20px;
+    color: #333333;
+    display: flex;
+    align-items: center;
+    height: 55px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+main {
+    padding: 8px;
+}
+@keyframes slideIn {
+    from {
+        opacity: 0;                   
+    }
+    to { 
+        opacity: 1;               
+    }
+}
+.content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    animation: slideIn 0.2s ease-out forwards;
+}
+
+
+main nav {
+    background-color: white;
+    color: black;
+    text-align: right;
+    width: 100%; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+main nav h3 {
+    padding: 0px 10px;
+}
