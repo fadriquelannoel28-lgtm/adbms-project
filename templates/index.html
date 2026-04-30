@@ -10,12 +10,12 @@
     <nav class="navigator">
         <h1>MEDSTOCK</h1>
         <ul>
-            <li class="{{ 'active' if page_title == 'Dashboard' }}"><a href="{{ url_for('dashboard') }}"><i class="fas fa-home"></i>Dashboard</a></li>
-            <li class="{{ 'active' if page_title == 'Inventory Management' }}"><a href="{{ url_for('inventory_management') }}"><i class="fas fa-pills"></i>Medicine Inventory Management</a></li>
-            <li class="{{ 'active' if page_title == 'Stock Monitoring' }}"><a href="{{ url_for('stock_monitoring')}}"><i class="fas fa-chart-line"></i>Stock Monitoring</a></li>
-            <li class="{{ 'active' if page_title == 'Ordering System' }}"><a href="{{ url_for('ordering_system')}}"><i class="fas fa-shopping-cart"></i>Ordering System</a></li>
-            <li class="{{ 'active' if page_title == 'Reports' }}"><a href="{{ url_for('reports')}}"><i class="fas fa-file-alt"></i>Reports</a></li>
-            <li class="{{ 'active' if page_title == 'User Access' }}"><a href="{{ url_for('user_access')}}"><i class="fas fa-users"></i>User Access</a></li>
+            <li class="{{ 'active' if page_title == 'Dashboard' }}"><a href="{{ url_for('dashboard', user_id=u_id, name=u_name) }}"><i class="fas fa-home"></i>Dashboard</a></li>
+            <li class="{{ 'active' if page_title == 'Inventory Management' }}"><a href="{{ url_for('inventory_management', user_id=u_id, name=u_name) }}"><i class="fas fa-pills"></i>Medicine Inventory Management</a></li>
+            <li class="{{ 'active' if page_title == 'Stock Monitoring' }}"><a href="{{ url_for('stock_monitoring', user_id=u_id, name=u_name) }}"><i class="fas fa-chart-line"></i>Stock Monitoring</a></li>
+            <li class="{{ 'active' if page_title == 'Ordering System' }}"><a href="{{ url_for('ordering_system', user_id=u_id, name=u_name) }}"><i class="fas fa-shopping-cart"></i>Ordering System</a></li>
+            <li class="{{ 'active' if page_title == 'Reports' }}"><a href="{{ url_for('reports', user_id=u_id, name=u_name) }}"><i class="fas fa-file-alt"></i>Reports</a></li>
+            <li class="{{ 'active' if page_title == 'User Access' }}"><a href="{{ url_for('user_access', user_id=u_id, name=u_name) }}"><i class="fas fa-users"></i>User Access</a></li>
         </ul>
     </nav>
     <main class="content">

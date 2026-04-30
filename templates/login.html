@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Medicine Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/useraccount.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+<div class="parent-container">
+
+    <div class="left-container">
+        <h1>Welcome to MEDSTOCK</h1>
+        <p>Manage your medicine inventory efficiently and effectively with our user-friendly dashboard. Create an account to access all features and streamline your inventory management process.</p>
+    </div>
+    
+    <div class="right-container">
+        <form action="/login" method="POST">
+            <h1>LOGIN</h1>
+            <hr>
+            <h3>Sign In to Your Account</h3>
+
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+</div>
+
+</body>
+</html>
