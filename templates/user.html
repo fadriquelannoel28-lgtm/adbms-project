@@ -1,4 +1,144 @@
 {% extends "index.html" %}
 
 {% block content %}
+
+<div class="user-access">
+
+    <div class="profile">
+        <div class="profile-pic">
+            <img id="profilePreview" 
+                src="{{ url_for('static', filename='images/' + (u_profile_pic or 'default-image.jpg')) }}" 
+                alt="Profile Picture">
+            
+            <label for="fileInput" class="edit-btn">
+                <i class="fas fa-edit"></i>
+            </label>
+            
+            <form id="uploadForm" action="{{ url_for('upload_profile', user_id=u_id) }}" method="POST" enctype="multipart/form-data">
+                <input type="file" id="fileInput" name="profile_img" style="display: none;" onchange="this.form.submit()">
+            </form>
+        </div>
+
+        <div class="profile-info">
+            <h2>{{ u_lastname }} {{ u_firstname }}</h2>
+            <p>User ID: {{ u_id }}</p>
+        </div>
+    </div>
+
+    <div class="user-details">
+        <h3>MY PROFILE</h3>
+
+        <div class="details-content">
+
+            <div class="details-item">
+                <label for="firstname">First Name</label>
+                <input type="text" id="firstname" value="{{ u_firstname }}" readonly>
+            </div>
+
+            <div class="details-item">
+                <label for="lastname">Last Name</label>
+                <input type="text" id="lastname" value="{{ u_lastname }}" readonly>
+            </div>
+        </div>
+
+        <div class="details-content">
+            <div class="details-item">
+                <label for="middlename">Middle Name</label>
+                <input type="text" id="middlename" value="{{ u_middlename }}" readonly>
+            </div>
+
+            <div class="details-item">
+                <label for="gender">Gender</label>
+                <input type="text" id="gender" value="{{ u_gender }}" readonly>
+            </div>
+        </div>
+
+        <div class="details-content">
+            <div class="details-item">
+                <label for="phone">Phone Number</label>
+                <input type="text" id="phone" value="{{ u_phone }}" readonly>
+            </div>
+
+            <div class="details-item">
+                <label for="email">Email</label>
+                <input type="text" id="email" value="{{ u_email }}" readonly>
+            </div>
+        </div>
+
+        <div class="details-content">
+            <div class="details-item">
+                <label for="birthdate">Birthdate</label>
+                <input type="text" id="birthdate" value="{{ u_birthdate }}" readonly>
+            </div>
+        </div>
+
+        <div class="details-content">
+            <input type="checkbox" id="window" name="window">
+            
+            <div class="window-popup">
+                <label for="window">EDIT</label>
+            </div>
+
+            <div class="window">
+                <div class="anti-opacity">
+                    <label for="window" class="close-btn">&times;</label>
+                    <h3>Profile Edit</h3>
+                    <form action="{{ url_for('edit_profile', user_id=u_id) }}" method="POST">
+                        <div class="form-items-container"> 
+                            
+                            <div class="form-group">
+                                <label for="edit_firstname">First Name</label>
+                                <input type="text" id="edit_firstname" name="edit_firstname" value="{{ u_firstname }}" required>
+                            </div>
+
+                            
+                            <div class="form-group">
+                                <label for="edit_lastname">Last Name</label>
+                                <input type="text" id="edit_lastname" name="edit_lastname" value="{{ u_lastname }}" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="edit_middlename">Middle Name</label>
+                                <input type="text" id="edit_middlename" name="edit_middlename" value="{{ u_middlename }}">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="edit_gender">Gender</label>
+                                <select id="edit_gender" name="edit_gender">
+                                    <option value="Male" {% if u_gender == 'Male' %}selected{% endif %}>Male</option>
+                                    <option value="Female" {% if u_gender == 'Female' %}selected{% endif %}>Female</option>
+                                    <option value="Other" {% if u_gender == 'Other' %}selected{% endif %}>Other</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="edit_phone">Phone Number</label>
+                                <input type="tel" id="edit_phone" name="edit_phone" value="{{ u_phone }}" pattern="[0-9]{11}" placeholder="09123456789" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="edit_email">Email</label>
+                                <input type="email" id="edit_email" name="edit_email" value="{{ u_email }}" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="edit_birthdate">Birthdate</label>
+                                <input type="date" id="edit_birthdate" name="edit_birthdate" value="{{ u_birthdate }}" required>
+                            </div>
+
+                            <input type="submit" value="Save Changes" class="save-btn">
+                        </div>
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+</div>
+
 {% endblock %}
+

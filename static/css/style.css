@@ -6,6 +6,9 @@ body {
     min-height: 100vh;
     background-color: rgb(239, 239, 239);
 }
+body::-webkit-scrollbar {
+    display: none;
+}
 .navigator {
     background-color: white;
     width: 20%;
@@ -114,4 +117,207 @@ main nav {
 }
 main nav h3 {
     padding: 0px 10px;
+}
+
+
+.user-access {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    animation: slideIn 0.2s ease-out forwards;
+    
+}
+
+.profile {
+    background-color: white;
+    color: black;
+    text-align: left;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    padding: 20px 0px;
+    margin-top: 10px;
+}
+
+.profile-pic {
+    position: relative;
+    width: 105px; 
+    height: 105px;
+    overflow: hidden; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 30px;
+}
+
+.profile-pic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%; 
+}
+
+.profile-info {
+    margin-left: 20px;
+}
+
+.edit-btn {
+    position: absolute; 
+    bottom: 0;          
+    right: 0;          
+
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+.edit-btn:hover {
+    background-color: #0056b3;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.user-details {
+    background-color: white;
+    color: black;
+    text-align: left;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px 0px;
+    margin-top: 10px;
+}
+
+.user-details h3 {
+    padding: 0px 20px;
+}
+
+.details-content {
+    display: flex;
+    gap: 20px;
+    padding: 0 20px;
+    margin-top: 25px;
+}
+
+.details-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.details-item label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.details-item input {
+    font-size: larger;
+    color: gray;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 545px;
+}
+
+#window {
+    display: none;
+}
+
+.window {
+    display: none;
+    position: fixed; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    background: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100vh;
+    padding: 20px;
+    z-index: 9999; 
+    border: 1px solid #000;
+}
+
+.window-popup {
+    margin-left: auto;
+}
+
+.window-popup label {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-block;
+    user-select: none;
+}
+
+.anti-opacity {
+    background: white;
+    position: relative; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    width: 50%;
+    padding: 20px 10px;
+
+}
+
+.close-btn {
+    position: absolute;
+    top: 2px;
+    right: 9px;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #333;
+    user-select: none;
+}
+
+#window:checked ~ .window {
+    display: block;
+}
+
+
+
+.form-items-container {
+    display: flex;
+    flex-direction: column; 
+    gap: 15px;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.form-group label {
+    width: 120px; 
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.form-group input, select {
+    flex-grow: 1; 
+    padding: 12px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    min-width: 0; 
+}
+
+.save-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    align-self: flex-end; 
 }
