@@ -23,25 +23,57 @@
                 }
             });
         });
+
+        function previewImage(event) {
+                const input = event.target;
+                if (input.files && input.files[0]) {
+                    const reader = new FileReader();
+
+                    reader.onload = function(e) {
+                        const preview = document.getElementById('id-preview');
+                        if (preview) {
+                            preview.src = e.target.result;
+                            console.log("Image preview updated successfully."); // Debugging line
+                        } else {
+                            console.error("Could not find element with ID 'id-preview'");
+                        }
+                    };
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
     </script>
 </head>
 <body>
+
     <nav class="navigator">
         <h1>MEDSTOCK</h1>
         <ul>
-            <li class="{{ 'active' if page_title == 'Dashboard' }}"><a href="{{ url_for('main.dashboard', user_id=u_id, name=u_name) }}"><i class="fas fa-home"></i>Dashboard</a></li>
-            <li class="{{ 'active' if page_title == 'Inventory Management' }}"><a href="{{ url_for('inv.inventory_management', user_id=u_id, name=u_name) }}"><i class="fas fa-pills"></i>Medicine Inventory Management</a></li>
-            <li class="{{ 'active' if page_title == 'Stock Monitoring' }}"><a href="{{ url_for('main.stock_monitoring', user_id=u_id, name=u_name) }}"><i class="fas fa-chart-line"></i>Stock Monitoring</a></li>
-            <li class="{{ 'active' if page_title == 'Ordering System' }}"><a href="{{ url_for('main.ordering_system', user_id=u_id, name=u_name) }}"><i class="fas fa-shopping-cart"></i>Ordering System</a></li>
-            <li class="{{ 'active' if page_title == 'Reports' }}"><a href="{{ url_for('main.reports', user_id=u_id, name=u_name) }}"><i class="fas fa-file-alt"></i>Reports</a></li>
-            <li class="{{ 'active' if page_title == 'User Access' }}"><a href="{{ url_for('main.user_access', user_id=u_id, name=u_name) }}"><i class="fas fa-users"></i>User Access</a></li>
+            {% if u_verify %}
+                <li class="{{ 'active' if page_title == 'Dashboard' }}"><a href="{{ url_for('main.dashboard', user_id=u_id, name=u_name) }}"><i class="fas fa-home"></i>Dashboard</a></li>
+                <li class="{{ 'active' if page_title == 'Inventory Management' }}"><a href="{{ url_for('inv.inventory_management', user_id=u_id, name=u_name) }}"><i class="fas fa-pills"></i>Medicine Inventory Management</a></li>
+                <li class="{{ 'active' if page_title == 'Stock Monitoring' }}"><a href="{{ url_for('main.stock_monitoring', user_id=u_id, name=u_name) }}"><i class="fas fa-chart-line"></i>Stock Monitoring</a></li>
+                <li class="{{ 'active' if page_title == 'Ordering System' }}"><a href="{{ url_for('main.ordering_system', user_id=u_id, name=u_name) }}"><i class="fas fa-shopping-cart"></i>Ordering System</a></li>
+                <li class="{{ 'active' if page_title == 'Reports' }}"><a href="{{ url_for('main.reports', user_id=u_id, name=u_name) }}"><i class="fas fa-file-alt"></i>Reports</a></li>
+                <li class="{{ 'active' if page_title == 'User Access' }}"><a href="{{ url_for('main.user_access', user_id=u_id, name=u_name) }}"><i class="fas fa-users"></i>My Profile</a>
+            </li>
+
+            {% endif %}
+
+            {% if not u_verify %}
+            <li class="{{ 'active' if page_title == 'User Access' }}">
+                <a href="{{ url_for('main.user_access', user_id=u_id, name=u_name) }}"><i class="fas fa-users"></i>User Information</a>
+            </li>
+            {% endif %}
         </ul>
     </nav>
+
     <main class="content">
         <nav><h3>{{ page_title }}</h3></nav>
         {% block content %}{% endblock %}
         <span class="logo">All Rights Reserved &copy; 2023</span>
     </main>
-    
+
+
 </body>
 </html>

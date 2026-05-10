@@ -1,4 +1,79 @@
 {% extends "index.html" %}
 
 {% block content %}
+
+<div class="smonitoring">
+    
+    <div class="sm-nav">
+
+        <input type="checkbox" id="sm-stock-in" style="display: none;">
+        <div class="sm-background">
+            <div class="pop-up-content">
+                <label for="sm-stock-in">&times;</label>
+                <h3>some content for stock in</h3>
+            </div>
+        </div>
+
+        <input type="checkbox" id="sm-stock-out" style="display: none;">
+        <div class="sm-background">
+            <div class="pop-up-content">
+                <label for="sm-stock-out">&times;</label>
+                <h3>some content for stock out</h3>
+            </div>
+        </div>
+
+        <div class="sm-nav-left">
+            <input type="text" name="sm-search" id="sm-search" placeholder="Search" class="search-input">
+            <button class="search-button">Search</button>
+
+            <select name="sm-status" id="sm-status">
+                <option value="">All Status</option>
+                <option value="instock">In Stock</option>
+                <option value="lowstock">Low Stock</option>
+                <option value="outofstock">Out of Stock</option>
+            </select>
+
+            <select name="sm-expiry" id="sm-expiry">
+                <option value="">All Expiry</option>
+                <option value="60-days">Expiry in 60 days</option>
+                <option value="30-days">Expiry in 30 days</option>
+            </select>
+        </div>
+
+        <div class="sm-nav-right">
+
+            <div class="window-stock-in">
+                <label for="sm-stock-in" class="btn-stockin-open">Stock In</label>
+
+                <label for="sm-stock-out" class="btn-stockout-open">Stock Out</label>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="smbody">
+
+        <table style="margin-top: 20px;">
+            <tr>
+                <th>row 1</th>
+                <th>row 2</th>
+                <th>row 3</th>
+            </tr>
+            <tr>
+                <td>data 1</td>
+                <td>data 2</td>
+                <td>data 3</td>
+            </tr>
+            <tr>
+                <td>data 1</td>
+                <td>data 2</td>
+                <td>data 3</td>
+            </tr>
+        </table>
+
+    </div>
+
+</div>
+
 {% endblock %}

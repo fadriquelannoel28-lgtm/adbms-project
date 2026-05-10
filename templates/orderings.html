@@ -1,4 +1,78 @@
 {% extends "index.html" %}
 
 {% block content %}
+
+<div class="orderingbody">
+
+    <div class="os-left">
+        <h4>Create Purchase Order</h4>
+
+        <form>
+            <div class="os-flex-container">
+                <div class="os-flex">
+                    <label>Supplier Name</label>
+                    <input type="text" placeholder="Select Supplier">
+                </div>
+
+                <div class="os-flex">
+                    <label>Order Date</label>
+                    <input type="date">
+                </div>
+            </div>
+
+            <div class="os-flex-container">
+                <div class="os-flex">
+                    <label>Medicine</label>
+                    <input type="text" placeholder="Select Medicine">
+                </div>
+
+                <div class="os-flex">
+                    <label>Quantity to Order</label>
+                    <input type="number" min="0" placeholder="Quantity">
+                </div>
+            </div>
+            <div class="os-flex">
+                <label>Notes / Remarks</label>
+                <input type="text" placeholder="e.g. urgent restock...">
+            </div>
+
+            <button>Submit Order</button>
+        </form>
+        
+        <hr style="margin: 20px 0;">
+
+        <h4>Mark Order as Received</h4>
+
+        
+        <form>
+            <div class="os-flex-container">
+                <div class="os-flex">
+                    <label>Select Order</label>
+                    <input type="text" placeholder="PO-2026-041">
+                </div>
+
+                <div class="os-flex">
+                    <label>Date Received</label>
+                    <input type="date" value="2026-05-10">
+                </div>
+            </div>
+            <p style="color: gray;">Marking as received will automatically update stock quantity.</p>
+            <button>Confirm Receipt</button>
+        </form>
+    </div>
+    <div class="os-right">
+        <h4>Order History</h4>
+
+        <div class="history-container">
+            <span>Recieved</span>
+            <h4>PO-2026-041</h4>
+            <p>Supplier: Med Corp</p>
+            <p>May 5, 2026</p>
+            <hr>
+            <p>Amoxicillin 500mg x 100</p>
+            <p>Cetirizine 10mg × 200</p>
+        </div>
+    </div>
+
+</div>
 {% endblock %}

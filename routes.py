@@ -1,9 +1,10 @@
 from datetime import datetime
 import os
 
-from flask import Blueprint, flash, redirect, render_template, request, url_for, session
+from flask import Blueprint, flash, redirect, render_template, request, url_for, session, current_app
 from flask_login import login_required, current_user, login_user
 from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.utils import secure_filename
 from functools import wraps
 
 from extensions import db
@@ -35,28 +36,32 @@ def index():
 @main.route('/Dashboard/user-<int:user_id>/<name>')
 @session_login_required
 def dashboard(user_id, name):
-    return render_template('index.html', page_title='Dashboard', u_id=user_id, u_name=name)
+    user = User.query.get_or_404(user_id)
+    return render_template('index.html', page_title='Dashboard', u_id=user_id, u_name=name, u_verify=user.verify)
 
 
 # ── Stock Monitoring 
 @main.route('/Stock-Monitoring/user-<int:user_id>/<name>')
 @session_login_required
 def stock_monitoring(user_id, name):
-    return render_template('smonitoring.html', page_title='Stock Monitoring', u_id=user_id, u_name=name)
+    user = User.query.get_or_404(user_id)
+    return render_template('smonitoring.html', page_title='Stock Monitoring', u_id=user_id, u_name=name, u_verify=user.verify)
 
 
 # ── Ordering System 
 @main.route('/Ordering-System/user-<int:user_id>/<name>')
 @session_login_required
 def ordering_system(user_id, name):
-    return render_template('orderings.html', page_title='Ordering System', u_id=user_id, u_name=name)
+    user = User.query.get_or_404(user_id)
+    return render_template('orderings.html', page_title='Ordering System', u_id=user_id, u_name=name, u_verify=user.verify)
 
 
 # ── Reports 
 @main.route('/Reports/user-<int:user_id>/<name>')
 @session_login_required
 def reports(user_id, name):
-    return render_template('reports.html', page_title='Reports', u_id=user_id, u_name=name)
+    user = User.query.get_or_404(user_id)
+    return render_template('reports.html', page_title='Reports', u_id=user_id, u_name=name, u_verify=user.verify)
 
 
 # ── User Access 
@@ -69,6 +74,7 @@ def user_access(user_id, name):
         page_title='User Access',
         u_id=user_id,
         u_name=name,
+        u_verify=user.verify,
         u_profile_pic=user.profile_pic,
         u_firstname=user.first_name,
         u_lastname=user.last_name,
@@ -139,6 +145,8 @@ def inventory_management(user_id, name):
     search_query = request.args.get('search', '')
     view_mode    = request.args.get('view', 'cards')
 
+    user = User.query.get_or_404(user_id)
+
     if search_query:
         medicines = MedInventory.query.filter(
             (MedInventory.medicine_name.ilike(f'%{search_query}%')) |
@@ -152,6 +160,7 @@ def inventory_management(user_id, name):
         page_title='Inventory Management',
         u_id=user_id,
         u_name=name,
+        u_verify=user.verify,  
         medicines=medicines,
         view_mode=view_mode,
     )
@@ -236,19 +245,47 @@ def delete_medicine(medicine_id):
 @auth.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
+        password = request.form.get('password')
+        confirm_password = request.form.get('confirm_password')
+
+        if password != confirm_password:
+            return "Passwords do not match!", 400
+
+        file = request.files.get('govID')
+        filename = 'default-image.jpg'
+        if file and file.filename != '':
+            filename = secure_filename(file.filename)
+            upload_path = current_app.config['UPLOAD_FOLDER']
+            if not os.path.exists(upload_path):
+                os.makedirs(upload_path)
+            file.save(os.path.join(upload_path, filename))
+
+        date_str = request.form.get('birthdate')
+        birthdate_obj = None
+        if date_str:
+            birthdate_obj = datetime.strptime(date_str, '%Y-%m-%d').date()
+
         new_user = User(
             first_name    = request.form.get('firstname'),
+            middle_name   = request.form.get('middlename'),
             last_name     = request.form.get('lastname'),
-            email         = request.form.get('email'),
             username      = request.form.get('username'),
-            password_hash = generate_password_hash(request.form.get('password')),
+            email         = request.form.get('email'),
+            password_hash = generate_password_hash(password),
+            gender        = request.form.get('u_gender'),
+            phone         = request.form.get('phonenumber'),
+            role          = request.form.get('roles'),
+            birthdate     = birthdate_obj, 
+            gov_id_pic    = filename
         )
+
         try:
             db.session.add(new_user)
             db.session.commit()
             return redirect(url_for('auth.login'))
         except Exception as e:
             db.session.rollback()
+            print(f"DEBUG ERROR: {e}") 
             return f"Error: {str(e)}"
 
     return render_template('register.html')

@@ -1,3 +1,5 @@
+import os 
+
 class Config:
     DB_USER = 'root'
     DB_PASSWORD = 'Admin123'
@@ -10,3 +12,6 @@ class Config:
     )
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = 'medsave_key'
+
+    UPLOAD_FOLDER = os.path.join('static', 'images', 'ids')
+    MAX_CONTENT_LENGTH = 16 * 1024 * 1024 

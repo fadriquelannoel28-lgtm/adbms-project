@@ -1,4 +1,5 @@
 import pymysql
+import os
 from flask import Flask
 
 from config import Config
@@ -8,6 +9,9 @@ from extensions import db, login_manager
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
+
+    if not os.path.exists(app.config['UPLOAD_FOLDER']):
+        os.makedirs(app.config['UPLOAD_FOLDER'])
 
     #  Auto-create database if it doesn't exist 
     try:
