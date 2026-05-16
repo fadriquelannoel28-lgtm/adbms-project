@@ -1,8 +1,8 @@
-import os 
+import os
 
 class Config:
     DB_USER = 'root'
-    DB_PASSWORD = 'Admin123'
+    DB_PASSWORD = 'G@rbages222'
     DB_HOST = '127.0.0.1'
     DB_PORT = 3306
     DB_NAME = 'medstock'
@@ -14,4 +14,4 @@ class Config:
     SECRET_KEY = 'medsave_key'
 
     UPLOAD_FOLDER = os.path.join('static', 'images', 'ids')
-    MAX_CONTENT_LENGTH = 16 * 1024 * 1024 
+    MAX_CONTENT_LENGTH = 16 * 1024 * 1024
